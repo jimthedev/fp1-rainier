@@ -21,7 +21,7 @@ console.assert(total === 24)
 // that takes an array and a function
 // ----------------------------
 
-function reduce(array, callback){
+function reduce(array, callback, initialValue){
   // Create a variable that will hold the accumulator value
   // as it changes over time.
   var accumulator;
@@ -31,12 +31,12 @@ function reduce(array, callback){
 
     // If we're on the first item, use that item as the initial accumulator
     if( i === 0 ) {
-      accumulator = value
-    } else {
-      // If we're on any other item, call the callback function
-      // passing it the accumulator and value.
-      accumulator = callback(accumulator, value)
+      accumulator = initialValue
     }
+    
+    // If we're on any other item, call the callback function
+    // passing it the accumulator and value.
+    accumulator = callback(accumulator, value)
   });
 
   // We're done looping, return the end value of the accumulator
