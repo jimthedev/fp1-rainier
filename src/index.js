@@ -28,15 +28,17 @@ function reduce(array, callback, initialValue){
 
   // Loop through every item in the array
   forEach(array, function(value, i, originalArray) {
-
-    // If we're on the first item, use that item as the initial accumulator
-    if( i === 0 ) {
-      accumulator = initialValue
+    // If we don't have an initial value, set the value to the first item
+    if(typeof initialValue === 'undefined') {
+      initialValue = value;
     }
-    
+    // If we're on the first item, use that value as the accumulator
+    if( i === 0 ) {
+      accumulator = initialValue;
+    }
     // If we're on any other item, call the callback function
     // passing it the accumulator and value.
-    accumulator = callback(accumulator, value)
+    accumulator = callback(accumulator, value);
   });
 
   // We're done looping, return the end value of the accumulator
@@ -45,9 +47,18 @@ function reduce(array, callback, initialValue){
 
 // tests
 // ---
-console.assert(
-    reduce([1, 2, 3, 4], function(a, v){ return a*v }) === 24
-)
+// console.log([1, 2, 3, 4].reduce( function(a, v) { return a*v }, 1) );
+// console.log(reduce([1, 2, 3, 4], function(a, v){ return a*v }, 1));
+var multiplyResult = reduce([1, 2, 3, 4], function(a, v) { return a*v }, 1);
+console.assert(multiplyResult === 24);
+
+var sumResult = reduce([1, 2, 3, 4, 5], function(a, v) { return a+v }, 0);
+console.assert(sumResult === 15);
+
+var subtractResults = reduce([10, 5, 2, 1], function(a, v) { return a-v; }, 20);
+console.assert(subtractResults === 2);
+
+
 
 // ----------------------------
 // using forEach() from above, write your own map()
@@ -109,7 +120,7 @@ function sum(){
     var items = Array.prototype.slice.call(arguments);
     var sum = reduce(items, function(a, v){
       return a+v;
-    });
+    }, 0);
     return sum;
 }
 
