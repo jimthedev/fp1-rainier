@@ -47,8 +47,6 @@ function reduce(array, callback, initialValue){
 
 // tests
 // ---
-// console.log([1, 2, 3, 4].reduce( function(a, v) { return a*v }, 1) );
-// console.log(reduce([1, 2, 3, 4], function(a, v){ return a*v }, 1));
 var multiplyResult = reduce([1, 2, 3, 4], function(a, v) { return a*v }, 1);
 console.assert(multiplyResult === 24);
 
